@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: nginx2
-        image: nginx2:latest
+        image: registry.local/test/nginx2:latest
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

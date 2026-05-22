@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: nginx3
-        image: nginx3:latest
+        image: registry.local/test/nginx3:latest
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
