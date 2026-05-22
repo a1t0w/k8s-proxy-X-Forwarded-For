@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx3
+  namespace: nginx-forward
+  labels:
+    app: nginx3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx3
+  template:
+    metadata:
+      labels:
+        app: nginx3
+    spec:
+      containers:
+      - name: nginx3
+        image: nginx3:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-client-svc
+  namespace: nginx-forward
+spec:
+  type: ClusterIP
+  selector:
+    app: test-client
+  ports:
+  - port: 80
+    targetPort: 80
