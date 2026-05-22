@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx1-config
+  namespace: nginx-forward
+data:
+  nginx.conf: |
+    worker_processes 1;
+    events { worker_connections 1024; }
+
+    http {
+        server {
+            listen 80;
+
+            location /chain {
+                proxy_set_header X-Forwarded-For "";
+                proxy_set_header X-Forwarded-For "$remote_addr, $server_addr";
+                proxy_pass http://nginx2-svc:80/chain;
+            }
+
+            location /direct {
+                proxy_set_header X-Forwarded-For "";
+                proxy_set_header X-Forwarded-For "$remote_addr, $server_addr";
+                proxy_pass http://nginx-web-svc:8080;
+            }
+
+            location / {
+                proxy_set_header X-Forwarded-For "";
+                proxy_set_header X-Forwarded-For "$remote_addr, $server_addr";
+                proxy_pass http://nginx2-svc:80;
+            }
+        }
+    }

@@ -17,9 +17,18 @@ spec:
     spec:
       containers:
       - name: nginx2
-        image: registry.local/test/nginx2:latest
+        image: nginx:alpine
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
           containerPort: 80
           protocol: TCP
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx2-config
+

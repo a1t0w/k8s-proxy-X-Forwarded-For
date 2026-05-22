@@ -17,9 +17,12 @@ spec:
     spec:
       containers:
       - name: nginx-web
-        image: registry.local/test/nginx-web:latest
+        image: ealen/echo-server:latest
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
           containerPort: 8080
           protocol: TCP
+        env:
+        - name: PORT
+          value: "8080"

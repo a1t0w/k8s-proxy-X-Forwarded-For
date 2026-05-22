@@ -6,28 +6,12 @@
 
 **Цель:** Продемонстрировать корректную обработку заголовка `X-Forwarded-For` при прохождении запроса через цепочку прокси-серверов и защиту от подделки этого заголовка.
 
-## Сборка и установка
-
-```bash
-# Сборка Docker-образов
-docker build -t registry.local/test/nginx1:latest -f docker/nginx1/Dockerfile .
-docker build -t registry.local/test/nginx2:latest -f docker/nginx2/Dockerfile .
-docker build -t registry.local/test/nginx3:latest -f docker/nginx3/Dockerfile .
-docker build -t registry.local/test/nginx-web:latest -f docker/nginx-web/Dockerfile .
-docker build -t registry.local/test/test-client:latest -f docker/test-client/Dockerfile .
-```
-
-```bash
-# Пуш в хранилище
-docker push registry.local/test/nginx1:latest
-docker push registry.local/test/nginx2:latest
-docker push registry.local/test/nginx3:latest
-docker push registry.local/test/nginx-web:latest
-docker push registry.local/test/test-client:latest
-```
 
 # Применение манифестов
+```bash
 kubectl apply -f k8s/
+```
+ - Если поды упали, то скорее всего deployment применился раньше чем создался конфиг для nginx, просто перезапускаем deploy
 
 # Проверям статус svc и deploy
 kubectl get all -n nginx-forward -o wide

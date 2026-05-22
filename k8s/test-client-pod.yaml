@@ -8,6 +8,6 @@ metadata:
 spec:
   containers:
   - name: test-client
-    image: registry.local/test/test-client:latest
-    imagePullPolicy: IfNotPresent
+    image: curlimages/curl:latest
     command: ["sleep", "infinity"]
+
